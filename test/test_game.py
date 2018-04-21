@@ -1,4 +1,4 @@
-from game import heartbeat
+from game import heartbeat, Game
 
 def test_heartbeat():
     h = heartbeat()
@@ -7,4 +7,8 @@ def test_heartbeat():
     }
     assert h == expected
     
+def test_game_exists():
+    g = Game()
+    expected = True
+    assert g.game_exists == expected
 
