@@ -1,4 +1,4 @@
-from game import heartbeat, Game
+from game import heartbeat, Game, Board
 
 def test_heartbeat():
     h = heartbeat()
@@ -9,6 +9,18 @@ def test_heartbeat():
     
 def test_game_exists():
     g = Game()
-    expected = True
-    assert g.game_exists == expected
+    assert g.game_exists == True
 
+def test_game_instantiates_board():
+    g = Game()
+    assert isinstance(g.board, Board)
+
+def test_lose_ends_game():
+    g = Game()
+    g.lose()
+    assert g.game_over == True
+
+def test_win_ends_game():
+    g = Game()
+    g.win()
+    assert g.game_over == True
