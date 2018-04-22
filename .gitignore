@@ -1,2 +1,4 @@
 venv/
 pytest-example/
+.DS_Store
+.pytest_cache

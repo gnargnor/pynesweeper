@@ -24,3 +24,10 @@ def test_win_ends_game():
     g = Game()
     g.win()
     assert g.game_over == True
+
+def test_easy_settings():
+    s = Settings('easy')
+    s.mines == 10
+    s.columns == 10
+    s.rows == 10
+

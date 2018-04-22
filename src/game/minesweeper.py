@@ -1,6 +1,8 @@
-"""Game functionality"""
+"""Game functionality."""
 
 def heartbeat():
+    """Returns an object indicating the package is reachable."""
+
     return {
         'name': 'Minesweeper',
     }
@@ -29,5 +31,9 @@ class Board:
 
     def __init__(self, settings):
         self.board_exists = True
+
+
+
+
         
         
