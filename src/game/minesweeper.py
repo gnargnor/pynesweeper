@@ -42,6 +42,8 @@ class Settings:
 
     _difficulty = {
         'beginner': _Settings(10, 10, 10),
+        'intermediate': _Settings(40, 16, 16),
+        'expert': _Settings(99, 16, 30)
     }
 
     def __init__(self, option = 'beginner'):

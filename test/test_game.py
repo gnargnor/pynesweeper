@@ -31,9 +31,20 @@ def test_default_settings():
     assert s.columns == 10
     assert s.rows == 10
 
-def test_easy_settings():
+def test_beginner_settings():
     s = Settings('beginner')
     assert s.mines == 10
-    assert s.columns == 10
     assert s.rows == 10
+    assert s.columns == 10
 
+def test_intermediate_settings():
+    s = Settings('intermediate')
+    assert s.mines == 40
+    assert s.rows == 16
+    assert s.columns == 16
+
+def test_expert_settings():
+    s = Settings('expert')
+    assert s.mines == 99
+    assert s.rows == 16
+    assert s.columns == 30
