@@ -1,4 +1,4 @@
-from game import heartbeat, Game, Board
+from game import heartbeat, Game, Board, Settings
 
 def test_heartbeat():
     h = heartbeat()
@@ -25,9 +25,15 @@ def test_win_ends_game():
     g.win()
     assert g.game_over == True
 
+def test_default_settings():
+    s = Settings()
+    assert s.mines == 10
+    assert s.columns == 10
+    assert s.rows == 10
+
 def test_easy_settings():
-    s = Settings('easy')
-    s.mines == 10
-    s.columns == 10
-    s.rows == 10
+    s = Settings('beginner')
+    assert s.mines == 10
+    assert s.columns == 10
+    assert s.rows == 10
 
