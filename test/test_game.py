@@ -31,27 +31,33 @@ def test_default_settings():
     assert s.columns == 10
     assert s.rows == 10
 
-def test_beginner_settings():
+def test_setting_options():
     s = Settings('beginner')
     assert s.mines == 10
     assert s.rows == 10
     assert s.columns == 10
-
-def test_intermediate_settings():
     s = Settings('intermediate')
     assert s.mines == 40
     assert s.rows == 16
     assert s.columns == 16
-
-def test_expert_settings():
     s = Settings('expert')
     assert s.mines == 99
     assert s.rows == 16
     assert s.columns == 30
 
-def test_change_settings_beginner():
+
+def test_change_settings():
     g = Game()
     g.change_settings('beginner')
     assert g.settings.mines == 10
     assert g.settings.rows == 10
     assert g.settings.columns == 10
+    g.change_settings('intermediate')
+    assert g.settings.mines == 40
+    assert g.settings.rows == 16
+    assert g.settings.columns == 16
+    g.change_settings('expert')
+    assert g.settings.mines == 99
+    assert g.settings.rows == 16
+    assert g.settings.columns == 30
+
