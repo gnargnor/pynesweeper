@@ -48,3 +48,10 @@ def test_expert_settings():
     assert s.mines == 99
     assert s.rows == 16
     assert s.columns == 30
+
+def test_change_settings_beginner():
+    g = Game()
+    g.change_settings('beginner')
+    assert g.settings.mines == 10
+    assert g.settings.rows == 10
+    assert g.settings.columns == 10

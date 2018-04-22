@@ -17,6 +17,7 @@ class Game:
 
     def __init__(self, settings = default_settings):
         self.game_exists = True
+        self.settings = Settings()
         self.board = Board(settings)
 
     def lose(self):
@@ -24,6 +25,10 @@ class Game:
 
     def win(self):
         self.game_over = True
+
+    # Might need a class that exists outside of game?
+    def change_settings(self, option = 'beginner'):
+        self.settings = Settings(option)
 
 
 class Board:
