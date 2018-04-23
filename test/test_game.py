@@ -68,7 +68,7 @@ def test_setting_options():
     assert s.columns == 30
 
 
-def test_change_settings():
+# def test_change_settings():
     """Tests game settings changes."""
 
     g = Game()
@@ -146,6 +146,17 @@ def test_open_square_has_mine():
     s.open()
     assert s._open == True
     assert s._has_mine == True
+
+def test_layout_all_squares():
+
+    def assert_square(s):
+        assert isinstance(g.board._layout[s], Square)
+    
+    g = Game()
+    map(assert_square, g.board._layout)
+
+    
+
 
 
 

@@ -38,14 +38,26 @@ class Board:
     """Board class."""
 
     def __init__(self, settings):
+
         self.board_exists = True
-        self._layout = range(settings.rows * settings.columns)
+        layout = list(range(settings.rows * settings.columns))
+        self._layout = list(map(self._set_square, layout))
         self._mine_positions =  [randint(0, (settings.rows * settings.columns) - 1) 
                                 for mine in range(settings.mines)]
+        map(lambda m: self._layout[m]._set_mine(), self._mine_positions)
+
+    # def _set_mine(self, m):
+    #         self._layout[m].set_mine()
+
+    def _set_square(self, s):
+            s = Square()
+            return s
+    
+    
 
 
-    def _set_mines(self, mine_positions, layout):
-        [layout[pos].set_mine() for pos in mine_positions]
+    # def _set_mines(self, mine_positions, layout):
+    #     [layout[pos].set_mine() for pos in mine_positions]
 
 
 
