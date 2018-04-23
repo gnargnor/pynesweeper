@@ -33,7 +33,6 @@ class Game:
         self.board = Board(self.settings)
         
 
-
 class Board:
     """Board class."""
 
@@ -52,13 +51,6 @@ class Board:
     def _set_square(self, s):
             s = Square()
             return s
-    
-    
-
-
-    # def _set_mines(self, mine_positions, layout):
-    #     [layout[pos].set_mine() for pos in mine_positions]
-
 
 
 class Square:
