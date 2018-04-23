@@ -147,6 +147,7 @@ def test_open_square_has_mine():
     assert s._open == True
     assert s._has_mine == True
 
+
 def test_layout_all_squares():
 
     def assert_square(s):
@@ -154,8 +155,6 @@ def test_layout_all_squares():
     
     g = Game()
     map(assert_square, g.board._layout)
-
-    
 
 
 
