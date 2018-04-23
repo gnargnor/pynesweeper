@@ -1,6 +1,7 @@
 """Game functionality."""
 
 from collections import namedtuple
+from random import randint
 
 def heartbeat():
     """Returns an object indicating the package is reachable."""
@@ -13,12 +14,11 @@ class Game:
     """Game class."""
 
     game_over = False
-    default_settings = {}
 
-    def __init__(self, settings = default_settings):
+    def __init__(self):
         self.game_exists = True
         self.settings = Settings()
-        self.board = Board(settings)
+        self.board = Board(self.settings)
 
     def lose(self):
         self.game_over = True
@@ -28,16 +28,50 @@ class Game:
 
     # Might need a class that exists outside of game?
     def change_settings(self, option = 'beginner'):
+        self.game_over = False
         self.settings = Settings(option)
+        self.board = Board(self.settings)
+        
 
 
 class Board:
     """Board class."""
 
-    layout = []
-
     def __init__(self, settings):
         self.board_exists = True
+        self._layout = range(settings.rows * settings.columns)
+        self._mine_positions =  [randint(0, (settings.rows * settings.columns) - 1) 
+                                for mine in range(settings.mines)]
+
+
+    def _set_mines(self, mine_positions, layout):
+        [layout[pos].set_mine() for pos in mine_positions]
+
+
+
+class Square:
+    """Square class."""
+
+    _open = False
+    _has_mine = False
+    _has_flag = False
+    _value = None
+
+    def __init__(self):
+        pass
+    
+    def set_mine(self):
+        self._has_mine = True
+
+    def open(self):
+        if (self._has_flag or self._open):
+            return
+        self._open = True
+        return self._has_mine
+
+    def check(self):
+        return self._has_mine
+
 
 class Settings:
     """Game settings."""
