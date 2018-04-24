@@ -150,12 +150,27 @@ def test_open_square_has_mine():
 
 def test_layout_all_squares():
 
-    def assert_square(s):
-        assert isinstance(g.board._layout[s], Square)
-    
     g = Game()
-    map(assert_square, g.board._layout)
+    square_count = 0
+    for s in g.board._layout:
+        assert isinstance(s, Square)
+        square_count = square_count + 1
+    assert square_count == 100
 
+def test_count_all_mines():
+    g = Game()
+    mine_count = 0
+    for s in g.board._layout:
+        assert isinstance(s, Square)
+        if (s.check()):
+            assert s._has_mine == True
+            mine_count = mine_count + 1
+        else:
+            assert s._has_mine == False
+    assert mine_count == 10
+    
 
+    
 
+    # assert mine_count == 10
 

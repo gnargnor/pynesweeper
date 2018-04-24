@@ -43,10 +43,11 @@ class Board:
         self._layout = list(map(self._set_square, layout))
         self._mine_positions =  [randint(0, (settings.rows * settings.columns) - 1) 
                                 for mine in range(settings.mines)]
-        map(lambda m: self._layout[m]._set_mine(), self._mine_positions)
+        for mp in self._mine_positions:
+            self._layout[mp].set_mine()
 
-    # def _set_mine(self, m):
-    #         self._layout[m].set_mine()
+    # def _set_mine(self, s):
+    #   s.set_mine()
 
     def _set_square(self, s):
             s = Square()
