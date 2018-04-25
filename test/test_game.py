@@ -68,7 +68,7 @@ def test_setting_options():
     assert s.columns == 30
 
 
-# def test_change_settings():
+def test_change_settings():
     """Tests game settings changes."""
 
     g = Game()
@@ -157,20 +157,5 @@ def test_layout_all_squares():
         square_count = square_count + 1
     assert square_count == 100
 
-def test_count_all_mines():
-    g = Game()
-    mine_count = 0
-    for s in g.board._layout:
-        assert isinstance(s, Square)
-        if (s.check()):
-            assert s._has_mine == True
-            mine_count = mine_count + 1
-        else:
-            assert s._has_mine == False
-    assert mine_count == 10
-    
 
-    
-
-    # assert mine_count == 10
 
