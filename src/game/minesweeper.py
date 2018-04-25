@@ -27,6 +27,7 @@ class Game:
         self.game_over = True
 
     # Might need a class that exists outside of game?
+    # Interface?
     def change_settings(self, option = 'beginner'):
         self.game_over = False
         self.settings = Settings(option)
@@ -39,15 +40,11 @@ class Board:
     def __init__(self, settings):
 
         self.board_exists = True
-        layout = list(range(settings.rows * settings.columns))
-        self._layout = list(map(self._set_square, layout))
-        self._mine_positions =  [randint(0, (settings.rows * settings.columns) - 1) 
-                                for mine in range(settings.mines)]
+        self._layout = list(map(self._set_square, ([None] * (settings.rows * settings.columns))))
+        self._mine_positions =  [randint(0, len(self._layout) - 1) 
+                                for mine in ([None] * settings.mines)]
         for mp in self._mine_positions:
             self._layout[mp].set_mine()
-
-    # def _set_mine(self, s):
-    #   s.set_mine()
 
     def _set_square(self, s):
             s = Square()
@@ -94,11 +91,5 @@ class Settings:
         d = self._difficulty[option]
         self.mines = d.mines
         self.rows = d.rows
-        self.columns = d.columns
- 
-
-
-
-
-        
+        self.columns = d.columns        
         
