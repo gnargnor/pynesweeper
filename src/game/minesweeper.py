@@ -1,7 +1,7 @@
 """Game functionality."""
 
 from collections import namedtuple
-from random import randint
+from random import sample
 
 def heartbeat():
     """Returns an object indicating the package is reachable."""
@@ -40,27 +40,34 @@ class Board:
     def __init__(self, settings):
 
         self.board_exists = True
-        self._layout = list(map(self._set_square, ([None] * (settings.rows * settings.columns))))
-        self._mine_positions =  [randint(0, len(self._layout) - 1) 
-                                for mine in ([None] * settings.mines)]
-        for mp in self._mine_positions:
-            self._layout[mp].set_mine()
+        self._mine_positions =  sample(range(settings.rows * settings.columns), settings.mines)
+        self._layout = self._layout_board(settings, self._mine_positions)
 
-    def _set_square(self, s):
-            s = Square()
-            return s
+
+    def _layout_board(self, settings, mine_positions):
+        mines = sorted(mine_positions, reverse = True)
+        print(mine_positions)
+        _layout = []
+        for idx, s in enumerate(range(settings.rows * settings.columns)):
+            s = Square(idx)
+            if ((len(mines) > 0) and idx == mines[-1]):
+                s.set_mine()
+                mines.pop()
+            _layout.append(s)
+        return _layout
 
 
 class Square:
     """Square class."""
 
+    _id = None
     _open = False
     _has_mine = False
     _has_flag = False
     _value = None
 
-    def __init__(self):
-        pass
+    def __init__(self, position):
+        self._id = position
     
     def set_mine(self):
         self._has_mine = True
@@ -91,5 +98,4 @@ class Settings:
         d = self._difficulty[option]
         self.mines = d.mines
         self.rows = d.rows
-        self.columns = d.columns        
-        
+        self.columns = d.columns

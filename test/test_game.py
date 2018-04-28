@@ -105,6 +105,8 @@ def test_build_board():
     assert len(g.board._layout) == 480
 
 
+# may not need to keep track of mine positions after setup
+# depending on how check nearby works
 def test_mine_count():
     """Tests settings for mine count upon change."""
 
@@ -135,13 +137,13 @@ def test_mines_in_board_range():
 
 
 def test_open_square_no_mine():
-    s = Square()
+    s = Square(position = 0)
     s.open()
     assert s._open == True
     assert s._has_mine == False
     
 def test_open_square_has_mine():
-    s = Square()
+    s = Square(position = 0)
     s.set_mine()
     s.open()
     assert s._open == True
@@ -158,4 +160,7 @@ def test_layout_all_squares():
     assert square_count == 100
 
 
-
+def test_squares_have_ids():
+    g = Game()
+    for s in g.board._layout:
+        assert isinstance(s._id, int)
