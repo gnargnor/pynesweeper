@@ -164,3 +164,26 @@ def test_squares_have_ids():
     g = Game()
     for s in g.board._layout:
         assert isinstance(s._id, int)
+
+
+def test_count_mines():
+    g = Game()
+    mine_count = 0
+    for s in g.board._layout:
+        if (s.check()):
+            mine_count += 1
+    assert mine_count == 10
+
+    g.change_settings('intermediate')
+    mine_count = 0
+    for s in g.board._layout:
+        if (s.check()):
+            mine_count += 1
+    assert mine_count == 40
+
+    g.change_settings('expert')
+    mine_count = 0
+    for s in g.board._layout:
+        if (s.check()):
+            mine_count += 1
+    assert mine_count == 99
