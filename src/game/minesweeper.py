@@ -115,8 +115,35 @@ class Board:
 
     def get_northwest_neighbor(self, coordinates):
         row, column = coordinates
-        if (column > 1 and row > 0):
+        if (column > 0 and row > 0):
             return self._grid[row - 1][column - 1]
+
+
+    def get_neighbors(self, coordinates):
+        # neighbor_list = [self.get_north_neighbor
+        #     , self.get_northeast_neighbor
+        #     , self.get_east_neighbor
+        #     , self.get_southeast_neighbor
+        #     , self.get_south_neighbor
+        #     , self.get_southwest_neighbor
+        #     , self.get_west_neighbor
+        #     , self.get_northwest_neighbor
+        # ]
+        neighbor_list = [self.get_northwest_neighbor
+            , self.get_north_neighbor
+            , self.get_northeast_neighbor
+            , self.get_west_neighbor
+            , self.get_east_neighbor
+            , self.get_southwest_neighbor
+            , self.get_south_neighbor
+            , self. get_southeast_neighbor
+            ]
+        valid_neighbors = []
+        for possible_neighbor in neighbor_list:
+            neighborly_contender_value = possible_neighbor(coordinates)
+            if neighborly_contender_value is not None:
+                valid_neighbors.append(neighborly_contender_value)
+        return valid_neighbors
 
 
 class Square:
