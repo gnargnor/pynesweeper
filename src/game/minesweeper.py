@@ -13,10 +13,9 @@ def heartbeat():
 class Game:
     """Game class."""
 
-    game_over = False
-
     def __init__(self):
         self.game_exists = True
+        self.game_over = False
         self.settings = Settings()
         self.board = Board(self.settings)
 
@@ -38,10 +37,11 @@ class Board:
     """Board class."""
 
     def __init__(self, settings):
-
         self.board_exists = True
         self._mine_positions =  sample(range(settings.rows * settings.columns), settings.mines)
         self._layout = self._layout_board(settings, self._mine_positions)
+        self._grid = [list(range(idx * settings.columns, (idx * settings.columns) + settings.columns)) 
+                            for idx, row in enumerate(range(0, settings.rows))]
 
 
     def _layout_board(self, settings, mine_positions):
@@ -56,6 +56,37 @@ class Board:
             _layout.append(s)
         return _layout
 
+
+    def get_north_neighbor(self, coordinates):
+        row, column = coordinates
+        if row > 0:
+            north_neighbor = self._grid[row - 1][column]
+            print(north_neighbor)
+            return north_neighbor
+
+
+    def get_east_neighbor(self, coordinates):
+        row, column = coordinates
+        if column < (len(self._grid[0]) - 1):
+            right_neighbor = self._grid[row][column + 1]
+            print(right_neighbor)
+            return right_neighbor
+
+
+    def get_south_neighbor(self, coordinates):
+        row, column = coordinates
+        if row < (len(self._grid) - 1):
+            south_neighbor = self._grid[row + 1][column]
+            print(south_neighbor)
+            return south_neighbor
+
+
+    def get_west_neighbor(self, coordinates):
+        row, column = coordinates
+        if column > 0:
+            left_neighbor = self._grid[row][column - 1]
+            print(left_neighbor)
+            return left_neighbor
 
 class Square:
     """Square class."""

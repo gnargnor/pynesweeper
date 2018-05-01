@@ -187,3 +187,32 @@ def test_count_mines():
         if (s.check()):
             mine_count += 1
     assert mine_count == 99
+
+
+def test_grid_layout():
+    g = Game()
+    assert len(g.board._grid) == 10
+    g.change_settings('intermediate')
+    assert len(g.board._grid) == 16
+    g.change_settings('expert')
+    assert len(g.board._grid) == 16
+
+
+def test_neighbors():
+    g = Game()
+    # when passed row, column, return the index? Why? who knows.  I'm just pissin in the wind man.
+    assert g.board.get_east_neighbor((0, 0)) == 1
+    assert g.board.get_east_neighbor((0, 9)) == None
+
+    assert g.board.get_west_neighbor((0, 0)) == None
+    assert g.board.get_west_neighbor((0, 9)) == 8
+
+    assert g.board.get_north_neighbor((1, 1)) == 1
+    assert g.board.get_north_neighbor((0, 1)) == None
+
+    assert g.board.get_south_neighbor((9, 4)) == None
+    assert g.board.get_south_neighbor((3, 3)) == 43
+
+    # assert g.board.get_neighbors((0, 0)) == [1, 10, 11]
+    # assert g.board.get_neighbors((1, 1)) == [0, 1, 2, 10, 12, 20, 21, 22]
+    # assert g.board.get_neighbors((0, 9)) == [8, 18, 19]
