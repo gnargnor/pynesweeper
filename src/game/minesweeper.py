@@ -61,42 +61,32 @@ class Board:
         row, column = coordinates
         # if the row was 0, there would be no neighbor to the north
         if row > 0:
-            north_neighbor = self._grid[row - 1][column]
-            print(north_neighbor)
-            return north_neighbor
+            return self._grid[row - 1][column]
 
 
     def get_northeast_neighbor(self, coordinates):
         row, column = coordinates
         if (row > 0 and column < (len(self._grid[0]) - 1)):
-            northeast_neighbor = self._grid[row - 1][column + 1]
-            print(northeast_neighbor)
-            return northeast_neighbor
+            return self._grid[row - 1][column + 1]
 
 
     def get_east_neighbor(self, coordinates):
         row, column = coordinates
         # if the column index is one less than the length of a row, no bueno
         if column < (len(self._grid[0]) - 1):
-            east_neighbor = self._grid[row][column + 1]
-            print(east_neighbor)
-            return east_neighbor
+            return self._grid[row][column + 1]
 
     
     def get_southeast_neighbor(self, coordinates):
         row, column = coordinates
         if (column < (len(self._grid[0]) - 1) and row < (len(self._grid) - 1)):
-            southeast_neighbor = self._grid[row + 1][column + 1]
-            print(southeast_neighbor)
-            return southeast_neighbor
+            return self._grid[row + 1][column + 1]
 
 
     def get_south_neighbor(self, coordinates):
         row, column = coordinates
         if row < (len(self._grid) - 1):
-            south_neighbor = self._grid[row + 1][column]
-            print(south_neighbor)
-            return south_neighbor
+            return self._grid[row + 1][column]
 
 
     def get_southwest_neighbor(self, coordinates):
@@ -108,9 +98,7 @@ class Board:
     def get_west_neighbor(self, coordinates):
         row, column = coordinates
         if column > 0:
-            west_neighbor = self._grid[row][column - 1]
-            print(west_neighbor)
-            return west_neighbor
+            return self._grid[row][column - 1]
 
 
     def get_northwest_neighbor(self, coordinates):
@@ -120,15 +108,6 @@ class Board:
 
 
     def get_neighbors(self, coordinates):
-        # neighbor_list = [self.get_north_neighbor
-        #     , self.get_northeast_neighbor
-        #     , self.get_east_neighbor
-        #     , self.get_southeast_neighbor
-        #     , self.get_south_neighbor
-        #     , self.get_southwest_neighbor
-        #     , self.get_west_neighbor
-        #     , self.get_northwest_neighbor
-        # ]
         neighbor_list = [self.get_northwest_neighbor
             , self.get_north_neighbor
             , self.get_northeast_neighbor
