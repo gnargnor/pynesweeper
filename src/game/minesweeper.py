@@ -65,12 +65,14 @@ class Board:
             print(north_neighbor)
             return north_neighbor
 
+
     def get_northeast_neighbor(self, coordinates):
         row, column = coordinates
         if (row > 0 and column < (len(self._grid[0]) - 1)):
             northeast_neighbor = self._grid[row - 1][column + 1]
             print(northeast_neighbor)
             return northeast_neighbor
+
 
     def get_east_neighbor(self, coordinates):
         row, column = coordinates
@@ -97,12 +99,25 @@ class Board:
             return south_neighbor
 
 
+    def get_southwest_neighbor(self, coordinates):
+        row, column = coordinates
+        if (row < (len(self._grid) - 1) and column > 0):
+            return self._grid[row + 1][column - 1]
+
+    
     def get_west_neighbor(self, coordinates):
         row, column = coordinates
         if column > 0:
             west_neighbor = self._grid[row][column - 1]
             print(west_neighbor)
             return west_neighbor
+
+
+    def get_northwest_neighbor(self, coordinates):
+        row, column = coordinates
+        if (column > 1 and row > 0):
+            return self._grid[row - 1][column - 1]
+
 
 class Square:
     """Square class."""
