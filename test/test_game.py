@@ -213,6 +213,13 @@ def test_neighbors():
     assert g.board.get_south_neighbor((9, 4)) == None
     assert g.board.get_south_neighbor((3, 3)) == 43
 
+    assert g.board.get_northeast_neighbor((9, 9)) == None
+    assert g.board.get_northeast_neighbor((4, 5)) == 36
+
+    assert g.board.get_southeast_neighbor((9, 0)) == None
+    assert g.board.get_southeast_neighbor((4, 0)) == 51
+    assert g.board.get_southeast_neighbor((3, 9)) == None
+
     # assert g.board.get_neighbors((0, 0)) == [1, 10, 11]
     # assert g.board.get_neighbors((1, 1)) == [0, 1, 2, 10, 12, 20, 21, 22]
     # assert g.board.get_neighbors((0, 9)) == [8, 18, 19]

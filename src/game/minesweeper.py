@@ -59,18 +59,34 @@ class Board:
 
     def get_north_neighbor(self, coordinates):
         row, column = coordinates
+        # if the row was 0, there would be no neighbor to the north
         if row > 0:
             north_neighbor = self._grid[row - 1][column]
             print(north_neighbor)
             return north_neighbor
 
+    def get_northeast_neighbor(self, coordinates):
+        row, column = coordinates
+        if (row > 0 and column < (len(self._grid[0]) - 1)):
+            northeast_neighbor = self._grid[row - 1][column + 1]
+            print(northeast_neighbor)
+            return northeast_neighbor
 
     def get_east_neighbor(self, coordinates):
         row, column = coordinates
+        # if the column index is one less than the length of a row, no bueno
         if column < (len(self._grid[0]) - 1):
-            right_neighbor = self._grid[row][column + 1]
-            print(right_neighbor)
-            return right_neighbor
+            east_neighbor = self._grid[row][column + 1]
+            print(east_neighbor)
+            return east_neighbor
+
+    
+    def get_southeast_neighbor(self, coordinates):
+        row, column = coordinates
+        if (column < (len(self._grid[0]) - 1) and row < (len(self._grid) - 1)):
+            southeast_neighbor = self._grid[row + 1][column + 1]
+            print(southeast_neighbor)
+            return southeast_neighbor
 
 
     def get_south_neighbor(self, coordinates):
@@ -84,9 +100,9 @@ class Board:
     def get_west_neighbor(self, coordinates):
         row, column = coordinates
         if column > 0:
-            left_neighbor = self._grid[row][column - 1]
-            print(left_neighbor)
-            return left_neighbor
+            west_neighbor = self._grid[row][column - 1]
+            print(west_neighbor)
+            return west_neighbor
 
 class Square:
     """Square class."""
