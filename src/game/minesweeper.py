@@ -109,6 +109,20 @@ class Board:
             return self._grid[row - 1][column - 1]
 
 
+    def open_square(self, coordinates):
+        mines_nearby = len(self.check_neighbors(coordinates))
+        return mines_nearby
+
+
+    def check_neighbors(self, coordinates):
+        mines = []
+        for candidate in self.get_neighbors(coordinates):
+            mine_nearby = self._layout[candidate].check()
+            if mine_nearby:
+                mines.append(candidate)
+        return mines
+
+
     def get_neighbors(self, coordinates):
         """Returns a list of a square's neighbors.
 
@@ -125,10 +139,7 @@ class Board:
             , self._get_southeast_neighbor
             ]
         valid_neighbors = []
-        # scroll through directional functions
         for possible_neighbor in neighbor_list:
-            # the grid referenced in the neighbor check is indexed according
-            # to the layout containing 
             neighborly_contender_value = possible_neighbor(coordinates)
             if neighborly_contender_value is not None:
                 valid_neighbors.append(neighborly_contender_value)

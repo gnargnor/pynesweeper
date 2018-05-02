@@ -140,7 +140,8 @@ def test_open_square_no_mine():
     s.open()
     assert s._open == True
     assert s._has_mine == False
-    
+
+
 def test_open_square_has_mine():
     s = Square(position = 0)
     s.set_mine()
@@ -198,7 +199,7 @@ def test_grid_layout():
 
 def test_neighbors():
     g = Game()
-    
+
     assert g.board._get_east_neighbor((0, 0)) == 1
     assert g.board._get_east_neighbor((0, 9)) == None
 
@@ -231,8 +232,22 @@ def test_neighbors():
     assert g.board.get_neighbors((0, 9)) == [8, 18, 19]
 
 
-def test_set_value():
+def test_get_and_set_value():
     s = Square(25)
     s.set_value(5)
     square_value = s.get_value()
     assert square_value == 5
+
+
+def test_check_neighbors():
+    g = Game()
+    assert type(g.board.check_neighbors((0, 1))) == list
+
+
+def test_set_square_value():
+    g = Game()
+    mines_nearby = g.board.open_square((1, 1))
+    assert type(mines_nearby) == int
+
+    
+
