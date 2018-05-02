@@ -245,6 +245,7 @@ def test_check_neighbors():
 
 
 def test_set_square_value():
+    """Returns count of mines surrounding square."""
     g = Game()
     mines_nearby = g.board.open_square((1, 1))
     assert type(mines_nearby) == int
