@@ -124,7 +124,6 @@ def test_mines_in_board_range():
 
     def assert_position(g):
         """Each mine position within range of appropriate board."""
-
         for mine in g.board._mine_positions:
             assert mine < len(g.board._layout)
     
@@ -151,7 +150,6 @@ def test_open_square_has_mine():
 
 
 def test_layout_all_squares():
-
     g = Game()
     square_count = 0
     for s in g.board._layout:
@@ -200,34 +198,41 @@ def test_grid_layout():
 
 def test_neighbors():
     g = Game()
-    # when passed row, column, return the index? Why? who knows.  I'm just pissin in the wind man.
-    assert g.board.get_east_neighbor((0, 0)) == 1
-    assert g.board.get_east_neighbor((0, 9)) == None
-
-    assert g.board.get_west_neighbor((0, 0)) == None
-    assert g.board.get_west_neighbor((0, 9)) == 8
-
-    assert g.board.get_north_neighbor((1, 1)) == 1
-    assert g.board.get_north_neighbor((0, 1)) == None
-
-    assert g.board.get_south_neighbor((9, 4)) == None
-    assert g.board.get_south_neighbor((3, 3)) == 43
-
-    assert g.board.get_northeast_neighbor((9, 9)) == None
-    assert g.board.get_northeast_neighbor((4, 5)) == 36
-
-    assert g.board.get_southeast_neighbor((9, 0)) == None
-    assert g.board.get_southeast_neighbor((4, 0)) == 51
-    assert g.board.get_southeast_neighbor((3, 9)) == None
-
-    assert g.board.get_southwest_neighbor((9, 4)) == None
-    assert g.board.get_southwest_neighbor((4, 0)) == None
-    assert g.board.get_southwest_neighbor((6, 7)) == 76
     
-    assert g.board.get_northwest_neighbor((0, 5)) == None
-    assert g.board.get_northwest_neighbor((6, 0)) == None
-    assert g.board.get_northwest_neighbor((5, 5)) == 44
+    assert g.board._get_east_neighbor((0, 0)) == 1
+    assert g.board._get_east_neighbor((0, 9)) == None
+
+    assert g.board._get_west_neighbor((0, 0)) == None
+    assert g.board._get_west_neighbor((0, 9)) == 8
+
+    assert g.board._get_north_neighbor((1, 1)) == 1
+    assert g.board._get_north_neighbor((0, 1)) == None
+
+    assert g.board._get_south_neighbor((9, 4)) == None
+    assert g.board._get_south_neighbor((3, 3)) == 43
+
+    assert g.board._get_northeast_neighbor((9, 9)) == None
+    assert g.board._get_northeast_neighbor((4, 5)) == 36
+
+    assert g.board._get_southeast_neighbor((9, 0)) == None
+    assert g.board._get_southeast_neighbor((4, 0)) == 51
+    assert g.board._get_southeast_neighbor((3, 9)) == None
+
+    assert g.board._get_southwest_neighbor((9, 4)) == None
+    assert g.board._get_southwest_neighbor((4, 0)) == None
+    assert g.board._get_southwest_neighbor((6, 7)) == 76
+    
+    assert g.board._get_northwest_neighbor((0, 5)) == None
+    assert g.board._get_northwest_neighbor((6, 0)) == None
+    assert g.board._get_northwest_neighbor((5, 5)) == 44
 
     assert g.board.get_neighbors((0, 0)) == [1, 10, 11]
     assert g.board.get_neighbors((1, 1)) == [0, 1, 2, 10, 12, 20, 21, 22]
     assert g.board.get_neighbors((0, 9)) == [8, 18, 19]
+
+
+def test_set_value():
+    s = Square(25)
+    s.set_value(5)
+    square_value = s.get_value()
+    assert square_value == 5

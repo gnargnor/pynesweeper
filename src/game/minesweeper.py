@@ -38,10 +38,14 @@ class Board:
 
     def __init__(self, settings):
         self.board_exists = True
-        self._mine_positions =  sample(range(settings.rows * settings.columns), settings.mines)
+        self._mine_positions = sample(
+            range(settings.rows * settings.columns), settings.mines
+            )
         self._layout = self._layout_board(settings, self._mine_positions)
-        self._grid = [list(range(idx * settings.columns, (idx * settings.columns) + settings.columns)) 
-                            for idx, row in enumerate(range(0, settings.rows))]
+        self._grid = [list(range(idx * settings.columns,
+            (idx * settings.columns) + settings.columns)) 
+            for idx, row in enumerate(range(0, settings.rows)
+            )]
 
 
     def _layout_board(self, settings, mine_positions):
@@ -57,68 +61,74 @@ class Board:
         return _layout
 
 
-    def get_north_neighbor(self, coordinates):
+    def _get_north_neighbor(self, coordinates):
         row, column = coordinates
-        # if the row was 0, there would be no neighbor to the north
         if row > 0:
             return self._grid[row - 1][column]
 
 
-    def get_northeast_neighbor(self, coordinates):
+    def _get_northeast_neighbor(self, coordinates):
         row, column = coordinates
         if (row > 0 and column < (len(self._grid[0]) - 1)):
             return self._grid[row - 1][column + 1]
 
 
-    def get_east_neighbor(self, coordinates):
+    def _get_east_neighbor(self, coordinates):
         row, column = coordinates
-        # if the column index is one less than the length of a row, no bueno
         if column < (len(self._grid[0]) - 1):
             return self._grid[row][column + 1]
 
     
-    def get_southeast_neighbor(self, coordinates):
+    def _get_southeast_neighbor(self, coordinates):
         row, column = coordinates
         if (column < (len(self._grid[0]) - 1) and row < (len(self._grid) - 1)):
             return self._grid[row + 1][column + 1]
 
 
-    def get_south_neighbor(self, coordinates):
+    def _get_south_neighbor(self, coordinates):
         row, column = coordinates
         if row < (len(self._grid) - 1):
             return self._grid[row + 1][column]
 
 
-    def get_southwest_neighbor(self, coordinates):
+    def _get_southwest_neighbor(self, coordinates):
         row, column = coordinates
         if (row < (len(self._grid) - 1) and column > 0):
             return self._grid[row + 1][column - 1]
 
     
-    def get_west_neighbor(self, coordinates):
+    def _get_west_neighbor(self, coordinates):
         row, column = coordinates
         if column > 0:
             return self._grid[row][column - 1]
 
 
-    def get_northwest_neighbor(self, coordinates):
+    def _get_northwest_neighbor(self, coordinates):
         row, column = coordinates
         if (column > 0 and row > 0):
             return self._grid[row - 1][column - 1]
 
 
     def get_neighbors(self, coordinates):
-        neighbor_list = [self.get_northwest_neighbor
-            , self.get_north_neighbor
-            , self.get_northeast_neighbor
-            , self.get_west_neighbor
-            , self.get_east_neighbor
-            , self.get_southwest_neighbor
-            , self.get_south_neighbor
-            , self. get_southeast_neighbor
+        """Returns a list of a square's neighbors.
+
+        Keyword Arguments:
+        coordinates: A tuple containing the square's row and column values.
+        """
+        neighbor_list = [self._get_northwest_neighbor
+            , self._get_north_neighbor
+            , self._get_northeast_neighbor
+            , self._get_west_neighbor
+            , self._get_east_neighbor
+            , self._get_southwest_neighbor
+            , self._get_south_neighbor
+            , self._get_southeast_neighbor
             ]
         valid_neighbors = []
+        # scroll through directional functions
         for possible_neighbor in neighbor_list:
+            # the grid referenced in the neighbor check is indexed according
+            # to the layout containing 
             neighborly_contender_value = possible_neighbor(coordinates)
             if neighborly_contender_value is not None:
                 valid_neighbors.append(neighborly_contender_value)
@@ -139,6 +149,12 @@ class Square:
     
     def set_mine(self):
         self._has_mine = True
+
+    def set_value(self, value):
+        self._value = value
+
+    def get_value(self):
+        return self._value
 
     def open(self):
         if (self._has_flag or self._open):
