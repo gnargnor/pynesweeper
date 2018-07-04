@@ -1,7 +1,7 @@
 run: pip test
 	
 pip:
-	pip install .
+	pip install . --upgrade
 
 test: pip
 	pytest ./test
