@@ -1,6 +1,6 @@
 """Minesweeper package unit tests."""
 
-from game import heartbeat, Game, Board, Square, Settings
+from game import heartbeat, Game, Board, Cell, Settings
 
 def test_heartbeat():
     """Package is reachable."""
@@ -136,14 +136,14 @@ def test_mines_in_board_range():
 
 
 def test_open_square_no_mine():
-    s = Square(position = 0)
+    s = Cell(position = 0)
     s.open()
     assert s._open == True
     assert s._has_mine == False
 
 
 def test_open_square_has_mine():
-    s = Square(position = 0)
+    s = Cell(position = 0)
     s.set_mine()
     s.open()
     assert s._open == True
@@ -154,7 +154,7 @@ def test_layout_all_squares():
     g = Game()
     square_count = 0
     for s in g.board._layout:
-        assert isinstance(s, Square)
+        assert isinstance(s, Cell)
         square_count = square_count + 1
     assert square_count == 100
 
@@ -233,7 +233,7 @@ def test_neighbors():
 
 
 def test_get_and_set_value():
-    s = Square(25)
+    s = Cell(25)
     s.set_value(5)
     square_value = s.get_value()
     assert square_value == 5
