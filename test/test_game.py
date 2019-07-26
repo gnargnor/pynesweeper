@@ -2,6 +2,7 @@
 
 from game import heartbeat, Game, Board, Square, Settings
 
+
 def test_heartbeat():
     """Package is reachable."""
 
